@@ -1,0 +1,77 @@
+name: Publish libs
+on:
+  push:
+    branches:
+      - main
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get tags
+        run: git fetch --tags origin
+
+      - name: Enable Corepack (for Yarn v4)
+        run: corepack enable
+
+      - name: Prepare Corepack Yarn v4
+        run: corepack prepare yarn@4.5.0 --activate
+
+      - name: Check if Yarn is installed
+        run: |
+          echo "Checking Yarn version..."
+          yarn --version || echo "Yarn is not installed correctly"
+
+      - name: Get Yarn cache directory with debug
+        id: yarn-cache-dir
+        run: |
+          echo "Running 'yarn cache dir'..."
+          CACHE_DIR=$(yarn cache dir 2>/dev/null | grep -E '^/' || echo "")
+          if [ -n "$CACHE_DIR" ]; then
+            echo "Yarn cache directory found: $CACHE_DIR"
+            echo "dir=$CACHE_DIR" >> $GITHUB_ENV
+          else
+            echo "No Yarn cache directory found."
+          fi
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Cache Yarn modules
+        id: cache-yarn
+        uses: actions/cache@v3
+        with:
+          # If cache is found, use it; otherwise, fallback to yarn.lock
+          path: ${{ env.dir || 'node_modules' }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - if: ${{ steps.cache-yarn.outputs.cache-hit != 'true' }}
+        name: Install dependencies if cache is not found
+        run: yarn install
+
+      - name: Init git
+        run: |
+          git config --global user.name 'Safe angular Action'
+          git config --global user.email 'safe-angular@users.noreply.github.com'
+      - name: Authenticate with npm registry
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Version
+        run: |
+          echo "Checking for affected libraries and updating versions..."
+          npx nx affected --base=HEAD~1 --target=version --parallel=1
+
+      - name: Commit
+        uses: ./.github/actions/commit-and-push-changes
+        if: success()
+        continue-on-error: true

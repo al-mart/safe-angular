@@ -1,0 +1,46 @@
+{
+  "name": "prettier-config",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/prettier-config",
+  "projectType": "library",
+  "tags": ["prettier"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "yarn make-dir ./dist/@safe-angular/prettier-config",
+          "yarn cpy ./libs/prettier-config/index.js ./dist/@safe-angular/prettier-config --flat",
+          "yarn cpy ./libs/prettier-config/plugins ./dist/@safe-angular/prettier-config/plugins --flat",
+          "yarn cpy ./libs/prettier-config/package.json ./dist/@safe-angular/prettier-config --flat"
+        ]
+      }
+    },
+    "bump-versions": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": ["node tools/bump-versions.mjs -p=eslint-config"]
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "postTargets": ["prettier-config:bump-versions", "prettier-config:build", "prettier-config:publish"],
+        "trackDeps": true,
+        "skipProjectChangelog": true,
+        "tagPrefix": "prettier-config-v",
+        "skipCommit": true,
+        "releaseAs": "minor"
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm publish ./dist/@safe-angular/prettier-config"
+      }
+    }
+  }
+}

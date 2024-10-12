@@ -1,0 +1,14 @@
+{
+  "name": "@safe-angular/prettier-config",
+  "version": "0.4.0",
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "@prettier/plugin-xml": "*",
+    "prettier": "*",
+    "prettier-package-json": "*",
+    "prettier-plugin-organize-attributes": "*",
+    "eslint-plugin-prettier": "*",
+    "eslint-config-prettier": "*"
+  }
+}

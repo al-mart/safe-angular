@@ -1,0 +1,19 @@
+echo "Checking commit-message format..."
+
+# Get commit-message from the temporary file
+INPUT_FILE=$1
+commit_msg=$(head -n1 "$INPUT_FILE" | sed -e 's/\ *$//g')
+
+# Use grep for regex matching in sh
+echo "$commit_msg" | grep -Eq "^(feat|fix|perf|release|hotfix|revert): [a-z, ]{3,75}$"
+
+if [ $? -ne 0 ]; then
+    echo "Your commit-message format is not valid: $commit_msg"
+    echo "Valid format examples:"
+    echo "feat: message is not longer than 75 symbols "
+    echo "fix: message is longer than 3 symbols"
+    echo "Available prefixes are: feat, fix, perf, release, hotfix, revert"
+    exit 1
+fi
+
+exit 0

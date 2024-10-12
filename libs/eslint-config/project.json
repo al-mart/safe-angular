@@ -1,0 +1,62 @@
+{
+  "name": "eslint-config",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/eslint-config/src",
+  "projectType": "library",
+  "tags": ["eslint"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "yarn make-dir ./dist/@safe-angular/eslint-config",
+          "yarn cpy ./libs/eslint-config/index.js ./dist/@safe-angular/eslint-config --flat",
+          "yarn cpy ./libs/eslint-config/src/rules ./dist/@safe-angular/eslint-config/src/rules --flat",
+          "yarn cpy ./libs/eslint-config/src/eslint.config.js ./dist/@safe-angular/eslint-config/src --flat",
+          "yarn cpy ./libs/eslint-config/src/eslint-angular.config.js ./dist/@safe-angular/eslint-config/src --flat",
+          "yarn cpy ./libs/eslint-config/package.json ./dist/@safe-angular/eslint-config --flat"
+        ]
+      }
+    },
+    "build-local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "yarn make-dir ./node_modules/@safe-angular/eslint-config",
+          "yarn cpy ./libs/eslint-config/index.js ./node_modules/@safe-angular/eslint-config --flat",
+          "yarn cpy ./libs/eslint-config/src/rules ./node_modules/@safe-angular/eslint-config/src/rules --flat",
+          "yarn cpy ./libs/eslint-config/src/eslint.config.js ./node_modules/@safe-angular/eslint-config/src --flat",
+          "yarn cpy ./libs/eslint-config/src/eslint-angular.config.js ./node_modules/@safe-angular/eslint-config/src --flat",
+          "yarn cpy ./libs/eslint-config/package.json ./node_modules/@safe-angular/eslint-config --flat"
+        ]
+      }
+    },
+    "bump-versions": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": ["node tools/bump-versions.mjs -p=eslint-config"]
+      }
+    },
+    "version": {
+      "executor": "@jscutlery/semver:version",
+      "options": {
+        "commitMessageFormat": "chore(${projectName}): release version ${version}",
+        "postTargets": ["eslint-config:bump-versions", "eslint-config:build", "eslint-config:publish"],
+        "trackDeps": true,
+        "skipProjectChangelog": true,
+        "tagPrefix": "eslint-config-v",
+        "skipCommit": true,
+        "releaseAs": "minor"
+      }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm publish ./dist/@safe-angular/eslint-config"
+      }
+    }
+  }
+}

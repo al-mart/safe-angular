@@ -1,0 +1,14 @@
+# Get the list of staged files
+FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+
+# If no files are staged, exit
+[ -z "$FILES" ] && exit 0
+
+# Add back the modified/prettified files to staging (handling files with spaces)
+echo "$FILES" | tr '\n' '\0' | xargs -0 git add
+
+# Run linting and testing for precommit
+yarn lint:precommit
+yarn test:precommit
+
+exit 0

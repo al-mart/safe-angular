@@ -1,0 +1,21 @@
+{
+  "files.eol": "\n",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "cSpell.language": "en",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.linkedEditing": true,
+  "eslint.probe": ["javascript", "typescript", "html", "markdown"],
+  "eslint.validate": ["json"],
+  "prettier.prettierPath": "./node_modules/prettier/index.cjs",
+  "prettier.configPath": "./prettier.config.mjs",
+  "eslint.experimental.useFlatConfig": true,
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
+}

@@ -1,0 +1,73 @@
+name: 'commit-and-push'
+description: 'Commit and push tags'
+runs:
+  using: 'composite'
+  steps:
+    - name: Get changed libs
+      shell: bash
+      run: |
+        rm ~/.npmrc
+
+        # Ensure jq is installed
+        if ! command -v jq &> /dev/null
+        then
+          echo "jq could not be found, please ensure it is installed."
+          exit 1
+        fi
+
+        # Get affected projects and initialize variables
+        UPDATED_LIBS=()
+        AFFECTED_PROJECTS=($(npx nx show projects --affected --base=HEAD~1))
+
+        # Check if there are any affected projects
+        if [[ ${#AFFECTED_PROJECTS[@]} -eq 0 ]]; then
+          echo "No affected projects found. Exiting."
+          exit 0
+        fi
+
+        # Initialize the commit message
+        COMMIT_MESSAGE='version: '
+
+        # Loop through affected projects and check their versions
+        for PROJECT in "${AFFECTED_PROJECTS[@]}"; do
+          PACKAGE="libs/$PROJECT/package.json"
+
+          if [[ -f $PACKAGE ]]; then
+            TAG=''
+            PROJECT_VERSION=$(jq ".version" -r < "$PACKAGE")
+
+            if [[ $PROJECT_VERSION ]]; then
+              TAG="$PROJECT-v$PROJECT_VERSION"
+              UPDATED_LIBS+=("$TAG")
+            fi
+
+            # Update commit message
+            COMMIT_MESSAGE="$COMMIT_MESSAGE ($TAG)"
+          else
+            echo "Package.json not found for project $PROJECT. Skipping."
+          fi
+        done
+
+        # If no libraries were updated, skip the commit
+        if [[ ${#UPDATED_LIBS[@]} -eq 0 ]]; then
+          echo "No updated libraries found. Skipping commit and push."
+          exit 0
+        fi
+
+        # Commit the changes if there are updated libs
+        echo "${COMMIT_MESSAGE}"
+        git add .
+        git commit -m "${COMMIT_MESSAGE}"
+        git push origin
+
+        # Tag the updated libraries
+        for TAG in "${UPDATED_LIBS[@]}"; do
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists. Skipping force push."
+          else
+            git tag "$TAG"
+          fi
+        done
+
+        # Push tags
+        git push origin --tags

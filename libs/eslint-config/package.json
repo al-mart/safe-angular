@@ -1,0 +1,26 @@
+{
+  "name": "@safe-angular/eslint-config",
+  "version": "0.4.0",
+  "type": "module",
+  "main": "index.js",
+  "dependencies": {
+    "@eslint/js": "^9.11.1",
+    "typescript-eslint": "^8.7.0",
+    "angular-eslint": "^18.3.1",
+    "globals": "15.9.0",
+    "eslint-plugin-sonarjs": "^2.0.2",
+    "eslint-plugin-deprecation": "3.0.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "@eslint-community/eslint-plugin-eslint-comments": "^4.4.0",
+    "eslint-plugin-promise": "^7.1.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-unicorn": "^55.0.0",
+    "@cspell/eslint-plugin": "^8.14.4",
+    "eslint-plugin-jest": "^28.8.3",
+    "@stylistic/eslint-plugin-js": "^2.8.0",
+    "@stylistic/eslint-plugin-ts": "^2.8.0",
+    "@eslint/compat": "^1.1.1",
+    "@eslint/eslintrc": "3.1.0",
+    "eslint-plugin-rxjs-angular": "^2.0.1"
+  }
+}
