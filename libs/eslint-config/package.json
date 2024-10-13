@@ -3,6 +3,9 @@
   "version": "0.4.0",
   "type": "module",
   "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@eslint/js": "^9.11.1",
     "typescript-eslint": "^8.7.0",
