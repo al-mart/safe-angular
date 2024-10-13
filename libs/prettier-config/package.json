@@ -6,6 +6,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/al-mart/safe-angular"
+  },
   "dependencies": {
     "@prettier/plugin-xml": "*",
     "prettier": "*",

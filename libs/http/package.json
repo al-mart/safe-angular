@@ -6,6 +6,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/al-mart/safe-angular"
+  },
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0",

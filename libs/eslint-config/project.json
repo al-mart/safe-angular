@@ -25,6 +25,8 @@
         "parallel": false,
         "commands": [
           "yarn make-dir ./node_modules/@safe-angular/eslint-config",
+          "yarn cpy ./libs/eslint-config/LICENSE ./node_modules/@safe-angular/eslint-config --flat",
+          "yarn cpy ./libs/eslint-config/README.md ./node_modules/@safe-angular/eslint-config --flat",
           "yarn cpy ./libs/eslint-config/index.js ./node_modules/@safe-angular/eslint-config --flat",
           "yarn cpy ./libs/eslint-config/src/rules ./node_modules/@safe-angular/eslint-config/src/rules --flat",
           "yarn cpy ./libs/eslint-config/src/eslint.config.js ./node_modules/@safe-angular/eslint-config/src --flat",
@@ -55,7 +57,7 @@
     "publish": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npm publish ./dist/@safe-angular/eslint-config"
+        "command": " npm publish ./dist/@safe-angular/eslint-config"
       }
     }
   }

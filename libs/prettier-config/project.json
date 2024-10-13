@@ -11,6 +11,8 @@
         "parallel": false,
         "commands": [
           "yarn make-dir ./dist/@safe-angular/prettier-config",
+          "yarn cpy ./libs/prettier-config/LICENSE ./dist/@safe-angular/prettier-config --flat",
+          "yarn cpy ./libs/prettier-config/README.md ./dist/@safe-angular/prettier-config --flat",
           "yarn cpy ./libs/prettier-config/index.js ./dist/@safe-angular/prettier-config --flat",
           "yarn cpy ./libs/prettier-config/plugins ./dist/@safe-angular/prettier-config/plugins --flat",
           "yarn cpy ./libs/prettier-config/package.json ./dist/@safe-angular/prettier-config --flat"
