@@ -19,6 +19,20 @@
         ]
       }
     },
+    "build:local": {
+      "executor": "nx:run-commands",
+      "options": {
+        "parallel": false,
+        "commands": [
+          "yarn make-dir ./dist/@safe-angular/prettier-config",
+          "yarn cpy ./libs/prettier-config/LICENSE ./node_modules/@safe-angular/prettier-config --flat",
+          "yarn cpy ./libs/prettier-config/README.md ./node_modules/@safe-angular/prettier-config --flat",
+          "yarn cpy ./libs/prettier-config/index.js ./node_modules/@safe-angular/prettier-config --flat",
+          "yarn cpy ./libs/prettier-config/plugins ./node_modules/@safe-angular/prettier-config/plugins --flat",
+          "yarn cpy ./libs/prettier-config/package.json ./node_modules/@safe-angular/prettier-config --flat"
+        ]
+      }
+    },
     "bump-versions": {
       "executor": "nx:run-commands",
       "options": {

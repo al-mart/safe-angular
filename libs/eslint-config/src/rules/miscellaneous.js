@@ -16,7 +16,6 @@ export const miscellaneousRules = {
   'unicorn/new-for-builtins': 'error',
   'unicorn/no-array-push-push': 'error',
   'unicorn/no-empty-file': 'error',
-  'unicorn/no-unsafe-regex': 'error',
   'unicorn/no-useless-spread': 'error',
   'unicorn/prefer-logical-operator-over-ternary': 'error',
   'unicorn/prefer-string-replace-all': 'off',
