@@ -299,4 +299,5 @@ export const typescriptRules = {
     },
   ],
   '@typescript-eslint/no-unnecessary-type-parameters': 'off',
+  '@typescript-eslint/unbound-method': ['error', { ignoreStatic: true }],
 };

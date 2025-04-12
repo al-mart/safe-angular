@@ -6,6 +6,8 @@ export const miscellaneousRules = {
   'sonarjs/cognitive-complexity': ['error', 15],
   'sonarjs/elseif-without-else': 'error',
   'sonarjs/no-inverted-boolean-check': 'error',
+  'sonarjs/function-return-type': 'off',
+  'sonarjs/no-selector-parameter': 'off',
   'unicorn/escape-case': 'error',
   'unicorn/filename-case': [
     'error',

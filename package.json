@@ -9,7 +9,8 @@
     "prepare": "husky",
     "lint:precommit": "nx run-many -t=lint --all",
     "test:precommit": "nx run-many -t=test --all",
-    "test:test": "nx test http --skipNxCache"
+    "test:test": "nx test http --skipNxCache",
+    "upgrade-deps": "cd ./tools && node bump-versions.mjs -p=eslint-config"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^19.2.7",
