@@ -55,10 +55,10 @@ runs:
         fi
 
         # Commit the changes if there are updated libs
-        echo "${COMMIT_MESSAGE}"
-        git add .
-        git commit -m "${COMMIT_MESSAGE}"
-        git push origin
+        # echo "${COMMIT_MESSAGE}"
+        # git add .
+        # git commit -m "${COMMIT_MESSAGE}"
+        # git push origin
 
         # Tag the updated libraries
         for TAG in "${UPDATED_LIBS[@]}"; do
