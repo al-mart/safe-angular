@@ -91,6 +91,7 @@ export class RestTemplate<T> {
           );
         }
 
+        // eslint-disable-next-line rxjs/no-ignored-error
         return that.asObservable().subscribe(noop);
       },
     };
