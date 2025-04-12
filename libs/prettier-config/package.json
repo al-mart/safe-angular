@@ -11,11 +11,12 @@
     "url": "https://github.com/al-mart/safe-angular"
   },
   "dependencies": {
-    "@prettier/plugin-xml": "*",
-    "prettier": "*",
-    "prettier-package-json": "*",
-    "prettier-plugin-organize-attributes": "*",
-    "eslint-plugin-prettier": "*",
-    "eslint-config-prettier": "*"
+    "@prettier/plugin-xml": "^3.4.1",
+    "prettier": "^3.5.3",
+    "prettier-package-json": "^2.8.0",
+    "prettier-plugin-organize-attributes": "^1.0.0",
+    "eslint-plugin-prettier": "^5.2.6",
+    "eslint-config-prettier": "^10.1.2",
+    "sort-package-json": "^3.0.0"
   }
 }

@@ -9,7 +9,6 @@ export const angularRules = {
     '@angular-eslint/no-conflicting-lifecycle': 'error',
     '@angular-eslint/no-duplicates-in-metadata-arrays': 'error',
     '@angular-eslint/no-empty-lifecycle-method': 'error',
-    '@angular-eslint/no-host-metadata-property': 'error',
     '@angular-eslint/no-input-rename': 'warn',
     '@angular-eslint/no-inputs-metadata-property': 'error',
     '@angular-eslint/no-lifecycle-call': 'error',
